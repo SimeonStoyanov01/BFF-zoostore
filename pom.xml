@@ -10,25 +10,24 @@
 	</parent>
 	<groupId>com.example.tinqin.bff</groupId>
 	<artifactId>BFF</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${revision}</version>
 	<packaging>pom</packaging>
 	<name>BFF</name>
 	<description>BFF</description>
 	<modules>
 		<module>api</module>
+		<module>persistence</module>
+		<module>core</module>
+		<module>domain</module>
+		<module>rest</module>
 	</modules>
 	<properties>
 		<java.version>17</java.version>
+		<revision>0.0.4-SNAPSHOT</revision>
+		<zoostorestorage.revision>0.0.4-SNAPSHOT</zoostorestorage.revision>
+		<zoostore.revision>0.0.4-SNAPSHOT</zoostore.revision>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -49,18 +48,31 @@
 			<artifactId>feign-jackson</artifactId>
 			<version>12.4</version>
 		</dependency>
-		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
