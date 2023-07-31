@@ -23,9 +23,9 @@
 	</modules>
 	<properties>
 		<java.version>17</java.version>
-		<revision>0.0.4-SNAPSHOT</revision>
-		<zoostorestorage.revision>0.0.4-SNAPSHOT</zoostorestorage.revision>
-		<zoostore.revision>0.0.4-SNAPSHOT</zoostore.revision>
+		<revision>0.0.5-SNAPSHOT</revision>
+		<zoostorestorage.revision>0.0.5-SNAPSHOT</zoostorestorage.revision>
+		<zoostore.revision>0.0.5-SNAPSHOT</zoostore.revision>
 	</properties>
 	<dependencies>
 		<dependency>

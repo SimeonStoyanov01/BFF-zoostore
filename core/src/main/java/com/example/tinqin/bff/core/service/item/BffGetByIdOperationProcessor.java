@@ -9,8 +9,7 @@ import com.example.tinqin.zoostore.restexport.ZooStoreRestClient;
 import com.example.tinqin.zoostorestorage.API.operation.item.getbyid.StorageItemGetByIdResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 
 @Service
 public class BffGetByIdOperationProcessor implements BffItemGetByIdOperation {
@@ -28,14 +27,18 @@ public class BffGetByIdOperationProcessor implements BffItemGetByIdOperation {
     @Override
     public BffItemGetByIdResponse process(BffItemGetByIdRequest operationRequest) {
 
-        try{
+        try {
             zooStoreRestClient.itemGetById(operationRequest.getId());
-        }catch (Exception e){throw new RuntimeException("ZooStoreClientFactory: item does not exist");}
-        try{
+        } catch (Exception e) {
+            throw new RuntimeException("ZooStoreClientFactory: item does not exist");
+        }
+        try {
             zooStoreStorageRestClient.getStorageItemById(operationRequest.getId());
-        }catch (Exception e){throw new RuntimeException("StorageClientFactory: item does not exist");}
-        ItemGetByIdResponse item=zooStoreRestClient.itemGetById(operationRequest.getId());
-        StorageItemGetByIdResponse storage=zooStoreStorageRestClient.getStorageItemById(operationRequest.getId());
+        } catch (Exception e) {
+            throw new RuntimeException("StorageClientFactory: item does not exist");
+        }
+        ItemGetByIdResponse item = zooStoreRestClient.itemGetById(operationRequest.getId());
+        StorageItemGetByIdResponse storage = zooStoreStorageRestClient.getStorageItemById(operationRequest.getId());
 
 
         return BffItemGetByIdResponse
