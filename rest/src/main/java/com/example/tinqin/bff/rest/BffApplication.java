@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication
 @ComponentScan(basePackages = "com.example.tinqin.bff")
 @EntityScan(basePackages = "com.example.tinqin.bff.persistence.entity")
+@EnableJpaRepositories(basePackages = "com.example.tinqin.bff")
 public class BffApplication {
 
 	public static void main(String[] args) {
