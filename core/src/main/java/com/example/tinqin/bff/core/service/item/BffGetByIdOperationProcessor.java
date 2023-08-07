@@ -46,6 +46,7 @@ public class BffGetByIdOperationProcessor implements BffItemGetByIdOperation {
                 .id(item.getId())
                 .title(item.getTitle())
                 .price(storage.getPrice())
+                .quantity(storage.getQuantity())
                 .vendor(item.getVendor())
                 .build();
     }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+
 @Service
 public class RegisterUserOperationProcessor implements RegisterUserOperation {
     private final UserRepository userRepository;
@@ -36,6 +38,7 @@ public class RegisterUserOperationProcessor implements RegisterUserOperation {
         user.setLastName(operationRequest.getLastName());
         user.setPassword(passwordEncoder.encode(operationRequest.getPassword()));
         user.setRole(Role.USER);
+        user.setCartItems(new HashSet<>());
         userRepository.save(user);
         String token = jwtService.generateToken(user);
         return RegisterUserResponse
