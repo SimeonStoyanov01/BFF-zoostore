@@ -21,6 +21,7 @@ import java.util.*;
 public class TagGetItemOperationProcessor implements TagGetItemOperation {
     private final ZooStoreRestClient zooStoreRestClient;
     private final ZooStoreStorageRestClient storageRestClient;
+
     @Autowired
     public TagGetItemOperationProcessor(ZooStoreRestClient zooStoreRestClient, ZooStoreStorageRestClient zooStoreStorageRestClient) {
         this.zooStoreRestClient = zooStoreRestClient;
@@ -34,34 +35,54 @@ public class TagGetItemOperationProcessor implements TagGetItemOperation {
         } catch (Exception e) {
             throw new RuntimeException("ZooStoreClientFactory: tag does not exist");
         }
-        TagGetItemsResponse itemListFromZooStore=zooStoreRestClient.tagGetItem(operationRequest.getTitle(),operationRequest.getPage(), operationRequest.getSize());
-        List<String> storageItemList=new ArrayList<>();
-        for (GetItemsResponse item:itemListFromZooStore.getAllItems()) {
+        TagGetItemsResponse itemListFromZooStore = zooStoreRestClient.tagGetItem(operationRequest.getTitle(), operationRequest.getPage(), operationRequest.getSize());
+        List<String> storageItemList = new ArrayList<>();
+
+        for (GetItemsResponse item : itemListFromZooStore.getAllItems()) {
             storageItemList.add(item.getId().toString());
         }
-        GetCollectionOfStorageItemsByItemIdRequest storageItemRequest=GetCollectionOfStorageItemsByItemIdRequest
+
+        GetCollectionOfStorageItemsByItemIdRequest storageItemRequest = GetCollectionOfStorageItemsByItemIdRequest
                 .builder()
                 .itemId(storageItemList)
                 .build();
-        GetCollectionOfStorageItemsByItemIdResponse itemsFromStorage = storageRestClient.getItemCollection(storageItemRequest);
-        List<ItemResponse> collectionOfItems=new ArrayList<>();
-        for (GetItemsResponse item: itemListFromZooStore.getAllItems()) {
-            for (StorageItemForCollectionResponse st:itemsFromStorage.getStorageCollection()) {
-                if(item.getId().equals(st.getId())){
-                    ItemResponse itemResponse= ItemResponse
+
+        GetCollectionOfStorageItemsByItemIdResponse itemsFromStorage =
+                storageRestClient
+                        .getItemCollection(storageItemRequest);
+
+        List<ItemResponse> collectionOfItems = new ArrayList<>();
+
+        for (GetItemsResponse item : itemListFromZooStore.getAllItems()) {
+
+            for (StorageItemForCollectionResponse st : itemsFromStorage.getStorageCollection()) {
+
+                if (item.getId()
+                        .equals(st.getId())) {
+
+                    ItemResponse itemResponse = ItemResponse
+
                             .builder()
-                            .id(UUID.fromString(item.getId()))
-                            .title(item.getTitle())
-                            .vendor(item.getVendorName())
-                            .price(st.getPrice())
-                            .multimediaUrl(item.getMultimediaUrl())
-                            .tagTitle(item.getTagName())
-                            .quantity(st.getQuantity())
+                            .id(UUID
+                                    .fromString(item
+                                            .getId()))
+                            .title(item
+                                    .getTitle())
+                            .vendor(item
+                                    .getVendorName())
+                            .price(st.
+                                    getPrice())
+                            .multimediaUrl(item
+                                    .getMultimediaUrl())
+                            .tagTitle(item
+                                    .getTagName())
+                            .quantity(st
+                                    .getQuantity())
                             .build();
                     collectionOfItems.add(itemResponse);
                 }
             }
-            
+
         }
         return TagGetItemResponse
                 .builder()

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.example.tinqin.bff")
 @EntityScan(basePackages = "com.example.tinqin.bff.persistence.entity")
+//@EntityScan(basePackages = "com.example.tinqin.bff.persistence.repository")
 @EnableJpaRepositories(basePackages = "com.example.tinqin.bff")
 public class BffApplication {
 

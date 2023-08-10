@@ -34,7 +34,9 @@ public class UserEntity implements UserDetails {
     @OneToMany
     @JoinColumn(name = "userId")
     private Set<CartItemEntity> cartItems;
-
+    @OneToMany
+    @JoinColumn(name = "userId")
+    private Set<OrderEntity> orderEntities;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
