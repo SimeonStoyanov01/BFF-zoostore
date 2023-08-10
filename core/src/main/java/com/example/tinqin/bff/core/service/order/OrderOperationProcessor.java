@@ -8,13 +8,11 @@ import com.example.tinqin.bff.api.operation.order.OrderOperation;
 import com.example.tinqin.bff.api.operation.order.OrderRequest;
 import com.example.tinqin.bff.api.operation.order.OrderResponse;
 import com.example.tinqin.bff.api.operation.payment.PaymentOperation;
-import com.example.tinqin.bff.api.operation.payment.PaymentRequest;
 import com.example.tinqin.bff.core.exceptions.EmptyCartException;
 import com.example.tinqin.bff.core.exceptions.NoSuchItemExistsException;
 import com.example.tinqin.bff.core.exceptions.NoUserExistsException;
 import com.example.tinqin.bff.persistence.entity.CartItemEntity;
 import com.example.tinqin.bff.persistence.entity.OrderEntity;
-import com.example.tinqin.bff.persistence.entity.PaymentType;
 import com.example.tinqin.bff.persistence.entity.UserEntity;
 import com.example.tinqin.bff.persistence.repository.CartItemRepository;
 import com.example.tinqin.bff.persistence.repository.OrderRepository;
@@ -22,9 +20,6 @@ import com.example.tinqin.bff.persistence.repository.UserRepository;
 import com.example.tinqin.bff.restexport.ZooStoreStorageRestClient;
 import com.example.tinqin.zoostorestorage.API.operation.item.export.StorageItemExportRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class OrderOperationProcessor implements OrderOperation {

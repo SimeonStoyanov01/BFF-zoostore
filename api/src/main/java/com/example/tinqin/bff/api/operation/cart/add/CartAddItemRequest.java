@@ -4,7 +4,6 @@ import com.example.tinqin.bff.api.base.OperationRequest;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter

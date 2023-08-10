@@ -1,7 +1,6 @@
 package com.example.tinqin.bff.api.operation.cart.view;
 
 import com.example.tinqin.bff.api.base.OperationResponse;
-import com.example.tinqin.bff.api.operation.cart.add.CartAddItemResponse;
 import lombok.*;
 
 import java.math.BigDecimal;

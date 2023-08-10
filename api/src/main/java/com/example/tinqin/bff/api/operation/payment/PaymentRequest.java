@@ -6,7 +6,6 @@ import com.example.tinqin.bff.persistence.entity.PaymentType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.math.BigDecimal;
 
 
 @Getter

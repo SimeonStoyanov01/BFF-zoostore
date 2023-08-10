@@ -6,7 +6,6 @@ import com.example.tinqin.bff.api.operation.cart.add.CartAddItemResponse;
 import com.example.tinqin.bff.api.operation.cart.remove.CartRemoveItemOperation;
 import com.example.tinqin.bff.api.operation.cart.remove.CartRemoveItemRequest;
 import com.example.tinqin.bff.api.operation.cart.remove.CartRemoveItemResponse;
-import com.example.tinqin.bff.api.operation.cart.view.CartViewItemResponse;
 import com.example.tinqin.bff.api.operation.cart.view.CartViewOperation;
 import com.example.tinqin.bff.api.operation.cart.view.CartViewRequest;
 import com.example.tinqin.bff.api.operation.cart.view.CartViewResponse;

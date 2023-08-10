@@ -11,7 +11,6 @@ import com.example.tinqin.zoostore.restexport.ZooStoreRestClient;
 import com.example.tinqin.zoostorestorage.API.operation.item.getAll.GetCollectionOfStorageItemsByItemIdRequest;
 import com.example.tinqin.zoostorestorage.API.operation.item.getAll.GetCollectionOfStorageItemsByItemIdResponse;
 import com.example.tinqin.zoostorestorage.API.operation.item.getAll.StorageItemForCollectionResponse;
-import com.example.tinqin.zoostorestorage.API.operation.item.getbyid.StorageItemGetByIdResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
