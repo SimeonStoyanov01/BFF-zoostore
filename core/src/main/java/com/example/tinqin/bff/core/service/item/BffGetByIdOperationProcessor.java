@@ -1,10 +1,10 @@
 package com.example.tinqin.bff.core.service.item;
 
-import com.example.tinqin.bff.api.operation.item.get.BffItemGetByIdOperation;
-import com.example.tinqin.bff.api.operation.item.get.BffItemGetByIdRequest;
-import com.example.tinqin.bff.api.operation.item.get.BffItemGetByIdResponse;
+import com.example.tinqin.bff.api.operation.item.getby.id.BffItemGetByIdOperation;
+import com.example.tinqin.bff.api.operation.item.getby.id.BffItemGetByIdRequest;
+import com.example.tinqin.bff.api.operation.item.getby.id.BffItemGetByIdResponse;
 import com.example.tinqin.bff.restexport.ZooStoreStorageRestClient;
-import com.example.tinqin.zoostore.API.operation.item.getbyid.ItemGetByIdResponse;
+import com.example.tinqin.zoostore.API.operation.item.getby.id.ItemGetByIdResponse;
 import com.example.tinqin.zoostore.restexport.ZooStoreRestClient;
 import com.example.tinqin.zoostorestorage.API.operation.item.getbyid.StorageItemGetByIdResponse;
 import org.springframework.beans.factory.annotation.Autowired;

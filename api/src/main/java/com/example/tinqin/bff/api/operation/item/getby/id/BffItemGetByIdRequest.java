@@ -1,4 +1,4 @@
-package com.example.tinqin.bff.api.operation.item.get;
+package com.example.tinqin.bff.api.operation.item.getby.id;
 
 
 import com.example.tinqin.bff.api.base.OperationRequest;
