@@ -45,20 +45,20 @@ com.example.tinqin.zoostore.API.operation.item.getby.title.ItemGetByTitleRespons
 
         List<GetItemsResponse> storeItemList=itemsFromZooStore.getAllItems();
 
-        List<StorageItemGetByIdResponse> storageItemList;
-        try{
-                storageItemList = uuidList
-                .parallelStream()
-                        .map(itemId -> {
-                            StorageItemGetByIdResponse response = zooStoreStorageRestClient.getStorageItemById(itemId);
-                            if (!Objects.equals(response.getId(), "00000000-0000-0000-0000-000000000000")) {
-                                return StorageItemGetByIdResponse.builder()
-                                        .id(response.getId())
-                                        .price(response.getPrice())
-                                        .quantity(response.getQuantity())
-                                        .build();
-                            }
-                            return null; // Return null for invalid responses
+                            List<StorageItemGetByIdResponse> storageItemList;
+                            try{
+                                storageItemList = uuidList
+                                        .parallelStream()
+                                        .map(itemId -> {
+                                            StorageItemGetByIdResponse response = zooStoreStorageRestClient.getStorageItemById(itemId);
+                                            if (!Objects.equals(response.getId(), "00000000-0000-0000-0000-000000000000")) {
+                                                return StorageItemGetByIdResponse.builder()
+                                                        .id(response.getId())
+                                                        .price(response.getPrice())
+                                                        .quantity(response.getQuantity())
+                                                        .build();
+                                            }
+                                            return null; // Return null for invalid responses
                         })
                         .filter(Objects::nonNull) // Filter out null responses
                         .toList();}

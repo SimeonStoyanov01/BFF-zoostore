@@ -18,6 +18,6 @@ public class StorageClientFactory {
         return Feign.builder()
                 .encoder(new JacksonEncoder(objectMapper))
                 .decoder(new JacksonDecoder(objectMapper))
-                .target(ZooStoreStorageRestClient.class,"http://localhost:8081");
+                .target(ZooStoreStorageRestClient.class,"http://10.20.11.55:8081");
     }
 }
