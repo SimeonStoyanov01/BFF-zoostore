@@ -8,6 +8,7 @@ import com.example.tinqin.bff.api.operation.item.getby.id.BffItemGetByIdRequest;
 import com.example.tinqin.bff.api.operation.item.getby.id.BffItemGetByIdResponse;
 import com.example.tinqin.bff.core.exceptions.NoUserExistsException;
 import com.example.tinqin.bff.persistence.entity.CartItemEntity;
+import com.example.tinqin.bff.persistence.entity.ProductStatus;
 import com.example.tinqin.bff.persistence.entity.UserEntity;
 import com.example.tinqin.bff.persistence.repository.CartItemRepository;
 import com.example.tinqin.bff.persistence.repository.UserRepository;
@@ -20,6 +21,7 @@ public class CartAddItemOperationProcessor implements CartAddItemOperation {
     private final BffItemGetByIdOperation bffGetByIdOperation;
     private final UserRepository userRepository;
     private final CartItemRepository cartItemRepository;
+
 
 
     @Autowired
@@ -76,6 +78,8 @@ public class CartAddItemOperationProcessor implements CartAddItemOperation {
         cartItem.setPrice(calcPrice);
 
         cartItem.setUserId(user.getId());
+
+        cartItem.setProductStatus(ProductStatus.IN_CART);
 
         cartItemRepository.save(cartItem);
 

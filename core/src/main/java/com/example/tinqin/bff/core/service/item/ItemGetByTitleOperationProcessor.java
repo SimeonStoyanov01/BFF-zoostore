@@ -13,10 +13,7 @@ import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ItemGetByTitleOperationProcessor implements ItemGetByTitleOperation {
@@ -32,37 +29,37 @@ public class ItemGetByTitleOperationProcessor implements ItemGetByTitleOperation
     @Override
     public ItemGetByTitleResponse process(ItemGetByTitleRequest operationRequest) {
 
-com.example.tinqin.zoostore.API.operation.item.getby.title.ItemGetByTitleResponse itemsFromZooStore=zooStoreRestClient.getItemsByTitle
+        com.example.tinqin.zoostore.API.operation.item.getby.title.ItemGetByTitleResponse itemsFromZooStore = zooStoreRestClient.getItemsByTitle
                 (operationRequest.getTitle(),
                         operationRequest.getPage(),
                         operationRequest.getSize());
 
-        List<String> uuidList= itemsFromZooStore
+        List<String> uuidList = itemsFromZooStore
                 .getAllItems()
                 .stream()
                 .map(GetItemsResponse::getId)
                 .toList();
 
-        List<GetItemsResponse> storeItemList=itemsFromZooStore.getAllItems();
+        List<GetItemsResponse> storeItemList = itemsFromZooStore.getAllItems();
 
-                            List<StorageItemGetByIdResponse> storageItemList;
-                            try{
-                                storageItemList = uuidList
-                                        .parallelStream()
-                                        .map(itemId -> {
-                                            StorageItemGetByIdResponse response = zooStoreStorageRestClient.getStorageItemById(itemId);
-                                            if (!Objects.equals(response.getId(), "00000000-0000-0000-0000-000000000000")) {
-                                                return StorageItemGetByIdResponse.builder()
-                                                        .id(response.getId())
-                                                        .price(response.getPrice())
-                                                        .quantity(response.getQuantity())
-                                                        .build();
-                                            }
-                                            return null; // Return null for invalid responses
-                        })
-                        .filter(Objects::nonNull) // Filter out null responses
-                        .toList();}
-        catch(FeignException ex){
+        List<StorageItemGetByIdResponse> storageItemList;
+        try {
+            storageItemList = uuidList
+                    .parallelStream()
+                    .map(itemId -> {
+                        StorageItemGetByIdResponse response = zooStoreStorageRestClient.getStorageItemById(itemId);
+                        if (!Objects.equals(response.getId(), "00000000-0000-0000-0000-000000000000")) {
+                            return StorageItemGetByIdResponse.builder()
+                                    .id(response.getId())
+                                    .price(response.getPrice())
+                                    .quantity(response.getQuantity())
+                                    .build();
+                        }
+                        return null;
+                    })
+                    .filter(Objects::nonNull)
+                    .toList();
+        } catch (FeignException ex) {
             throw new NoSuchItemExistsException();
         }
         ItemGetByTitleResponse itemGetByTitleResponse = ItemGetByTitleResponse
@@ -70,6 +67,7 @@ com.example.tinqin.zoostore.API.operation.item.getby.title.ItemGetByTitleRespons
                 .totalItems(itemsFromZooStore.getTotalItems())
                 .page(itemsFromZooStore.getPage())
                 .size(itemsFromZooStore.getSize())
+                .itemResponse(new ArrayList<>())
                 .build();
 
         storeItemList.forEach(i -> {
@@ -92,8 +90,6 @@ com.example.tinqin.zoostore.API.operation.item.getby.title.ItemGetByTitleRespons
             itemGetByTitleResponse.getItemResponse().add(itemResponse);
 
         });
-
-
 
 
         return itemGetByTitleResponse;

@@ -13,6 +13,7 @@ import com.example.tinqin.bff.core.exceptions.NoSuchItemExistsException;
 import com.example.tinqin.bff.core.exceptions.NoUserExistsException;
 import com.example.tinqin.bff.persistence.entity.CartItemEntity;
 import com.example.tinqin.bff.persistence.entity.OrderEntity;
+import com.example.tinqin.bff.persistence.entity.ProductStatus;
 import com.example.tinqin.bff.persistence.entity.UserEntity;
 import com.example.tinqin.bff.persistence.repository.CartItemRepository;
 import com.example.tinqin.bff.persistence.repository.OrderRepository;
@@ -70,14 +71,7 @@ public class OrderOperationProcessor implements OrderOperation {
                                     user.getId())
                     .orElseThrow(NoSuchItemExistsException::new);
 
-//            order.getCartItemEntities().add(CartItemEntity
-//                    .builder()
-//                    .itemId(cartItem.getItemId())
-//                    .quantity(cartItem.getQuantity())
-//                    .userId(user.getId())
-//                    .price(cartItem.getTotalPrice())
-//                    .cartItemId(cartItemEntity.getCartItemId())
-//                    .build());
+
 
             StorageItemExportRequest storageItemExportRequest = StorageItemExportRequest
                     .builder()
@@ -86,7 +80,8 @@ public class OrderOperationProcessor implements OrderOperation {
                     .build();
 
             storageRestClient.exportItem(storageItemExportRequest);
-            cartItemRepository.delete(cartItemEntity);
+            cartItemEntity.setOrder(order);
+            cartItemEntity.setProductStatus(ProductStatus.BOUGHT);
         }
 
         order.setBill(cartView.getBill());

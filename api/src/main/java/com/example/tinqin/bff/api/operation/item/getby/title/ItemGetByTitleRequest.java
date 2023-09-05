@@ -12,6 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 public class ItemGetByTitleRequest implements OperationRequest {
     private String title;
-    Integer page;
-    Integer size;
+    private Integer page;
+    private Integer size;
 }

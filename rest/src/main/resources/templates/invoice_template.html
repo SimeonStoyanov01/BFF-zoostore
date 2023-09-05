@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Invoice</h1>
+<p>User ID: <span th:text="${userId}"></span></p>
+<p>User: <span th:text="${firstName}"></span> <span th:text="${lastName}"></span></p>
+<table>
+    <tr>
+        <th>Item ID</th>
+        <th>Item Title</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+    </tr>
+    <tr th:each="item : ${invoiceItems}">
+        <td th:text="${item.itemId}"></td>
+        <td th:text="${item.itemTitle}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.price}"></td>
+        <td th:text="${item.totalPrice}"></td>
+    </tr>
+</table>
+<p>Bill: <span th:text="${bill}"></span></p>
+<p>Time of Sale: <span th:text="${timeOfSale}"></span></p>
+</body>
+</html>

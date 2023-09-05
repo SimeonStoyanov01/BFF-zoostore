@@ -11,21 +11,20 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@Entity
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-@Entity
-@Table(name = "orders")
 public class OrderEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID orderId;
+    private UUID orderId; // Use a numeric ID for primary key
 
-    @CreationTimestamp(source = SourceType.DB)
-    @Column(nullable = false, updatable = false,insertable = false)
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private Timestamp timeOfSale;
 
     private UUID userId;
@@ -33,10 +32,8 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
-    @OneToMany
-    @JoinColumn(name = "userId")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<CartItemEntity> cartItemEntities = new HashSet<>();
 
     private BigDecimal bill;
-
 }

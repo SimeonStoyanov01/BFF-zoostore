@@ -17,10 +17,18 @@ public class CartItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID cartItemId;
+
     private UUID userId;
     private UUID itemId;
     private Integer quantity;
     private BigDecimal price;
+
+    @Enumerated(EnumType.STRING)
+    private ProductStatus productStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private OrderEntity order;
 
 
 }
